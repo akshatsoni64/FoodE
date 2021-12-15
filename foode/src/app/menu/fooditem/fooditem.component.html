@@ -1,0 +1,25 @@
+<div class="card bg-info text-white my-3">
+    <div class="card-header">
+        <p class="text-warning h3 text-center">{{ iteminfo.name }}</p>
+    </div>
+    <div class="card-body">
+        {{ iteminfo.description }}
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col">
+                ₹{{ iteminfo.price }}
+            </div>
+            <div class="col">
+                <div class="float-right">
+                    <button class="btn btn-primary-outline" (click)="addToCart(iteminfo)">
+                        <fa-icon [icon]="facart"></fa-icon>
+                    </button>
+                    <button class="btn btn-primary-outline" (click)="favItem()">
+                        <fa-icon [icon]="iteminfo.favourite != -1 ? filledHeart : unfilledHeart"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

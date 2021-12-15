@@ -1,0 +1,126 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin@foode.com",
+      "password": "12345678"
+    },
+    {
+      "id": 2,
+      "username": "akshat@foode.com",
+      "password": "12345678"
+    },
+    {
+      "id": 3,
+      "username": "mohit@foode.com",
+      "password": "12345678"
+    }
+  ],
+  "favourites": [
+    {
+      "user": "2",
+      "food": {
+        "name": "Apple",
+        "description": "Fresh Apple",
+        "price": "100",
+        "id": 1,
+        "favourite": -1
+      },
+      "id": 1
+    },
+    {
+      "user": "2",
+      "food": {
+        "name": "Grapes",
+        "description": "Fresh & Juicy Grapes",
+        "price": "120",
+        "id": 5,
+        "favourite": -1
+      },
+      "id": 2
+    }
+  ],
+  "food": [
+    {
+      "name": "Apple",
+      "description": "Fresh Apple",
+      "price": "100",
+      "id": 1
+    },
+    {
+      "name": "Mango",
+      "description": "Fresh and handpicked delicious Mango fruit, the king of fruit",
+      "price": "150",
+      "id": 2
+    },
+    {
+      "name": "Orange",
+      "description": "Fresh Fruit",
+      "price": "140",
+      "id": 3
+    },
+    {
+      "name": "Banana",
+      "description": "Fresh Banana",
+      "price": "120",
+      "id": 4
+    },
+    {
+      "name": "Grapes",
+      "description": "Fresh & Juicy Grapes",
+      "price": "120",
+      "id": 5
+    },
+    {
+      "name": "Watermelon",
+      "description": "Best in class Watermelon",
+      "price": "150",
+      "id": 6
+    },
+    {
+      "name": "Papaya",
+      "description": "Sweet & Juicy Papaya",
+      "price": "135",
+      "id": 7
+    }
+  ],
+  "cart": [
+    {
+      "food": {
+        "name": "Grapes",
+        "description": "Fresh & Juicy Grapes",
+        "price": "120",
+        "id": 5
+      },
+      "user": 2,
+      "active": true,
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "food": {
+        "name": "Banana",
+        "description": "Fresh Banana",
+        "price": "120",
+        "id": 4
+      },
+      "user": 2,
+      "active": true,
+      "quantity": 2,
+      "id": 2
+    },
+    {
+      "food": {
+        "name": "Mango",
+        "description": "Fresh and handpicked delicious Mango fruit, the king of fruit",
+        "price": "150",
+        "id": 2
+      },
+      "user": 2,
+      "active": true,
+      "quantity": 1,
+      "id": 3
+    }
+  ],
+  "orders": []
+}

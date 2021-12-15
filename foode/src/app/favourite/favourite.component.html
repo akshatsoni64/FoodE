@@ -1,0 +1,18 @@
+<div class="row" *ngIf="favCount > 0; else noFav">
+    <div class="card bg-primary text-white col-3 m-3" *ngFor="let item of favs">
+        <div class="card-body row py-3 px-1">
+            <div class="col">
+                {{item.food.name}}
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-danger float-right border-0" (click)="delFav(item.id)" title="Remove from favourites">
+                    <fa-icon [icon]="faheart"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noFav>
+    <p>No Favourite items found!</p>
+</ng-template>

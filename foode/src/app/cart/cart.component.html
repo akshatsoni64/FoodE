@@ -1,0 +1,33 @@
+<div *ngIf="cartCount > 0;else noCartItems">
+    <div *ngFor="let item of cart" class="my-3 card bg-danger text-white">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">{{item.food.name}} - ₹{{ item.food.price }} </div>
+                <div class="col-1">
+                    <button class="btn btn-outline-danger text-white border-0" (click)="delCartItem(item.id)">
+                        <fa-icon [icon]="facross"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="p-3 col">{{item.food.description}}</div>
+                <div class="p-3 col-2 text-center">
+                    <fa-icon [icon]="faplus" (click)="addCartItem(item)"></fa-icon>
+                    {{ item.quantity }}
+                    <fa-icon [icon]="faminus" *ngIf="item.quantity > 1" (click)="removeCartItem(item)"></fa-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #noCartItems>
+    <h1>
+        No cart items
+        <a routerLink="/user/menu">
+            Shop Here
+            <fa-icon [icon]="fashop"></fa-icon>
+        </a>
+    </h1>
+</ng-template>
