@@ -44,11 +44,55 @@
         "favourite": -1
       },
       "id": 4
+    },
+    {
+      "user": 2,
+      "food": {
+        "name": "Grapes",
+        "description": "Fresh & Juicy Grapes",
+        "price": "120",
+        "id": 5,
+        "favourite": -1
+      },
+      "id": 6
+    },
+    {
+      "user": 2,
+      "food": {
+        "name": "Papaya",
+        "description": "Sweet & Juicy Papaya",
+        "price": "135",
+        "id": 7,
+        "favourite": -1
+      },
+      "id": 7
+    },
+    {
+      "user": 2,
+      "food": {
+        "name": "Orange",
+        "description": "Fresh Fruit",
+        "price": "140",
+        "id": 3,
+        "favourite": -1
+      },
+      "id": 8
+    },
+    {
+      "user": 2,
+      "food": {
+        "name": "Apple",
+        "description": "Fresh Apple",
+        "price": "100",
+        "id": 1,
+        "favourite": -1
+      },
+      "id": 9
     }
   ],
   "food": [
     {
-      "name": "Apples",
+      "name": "Apple",
       "description": "Fresh Apple",
       "price": "100",
       "id": 1
