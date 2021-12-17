@@ -1,8 +1,8 @@
 <div *ngIf="cartCount > 0;else noCartItems">
-    <div *ngFor="let item of cart" class="my-3 card bg-danger text-white">
-        <div class="card-header">
+    <div *ngFor="let item of cart" class="my-3 card text-white">
+        <div class="card-header bg-danger">
             <div class="row">
-                <div class="col">{{item.food.name}} - ₹{{ item.food.price }} </div>
+                <div class="col">{{item.food.name}} - ₹{{ item.totalprice }} </div>
                 <div class="col-1">
                     <button class="btn btn-outline-danger text-white border-0" (click)="delCartItem(item.id)">
                         <fa-icon [icon]="facross"></fa-icon>
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body bg-info">
             <div class="row">
                 <div class="p-3 col">{{item.food.description}}</div>
                 <div class="p-3 col-2 text-center">
@@ -21,13 +21,34 @@
             </div>
         </div>
     </div>
+    <hr>
+    <div>
+        <b>Address:</b>
+        <input type="text" #address placeholder="Where this order will be delivered?" class="form-control">
+    </div>
+    <hr>
+    <h4>Your Order Summary:</h4>
+    <div class="row">
+        <div class="col">
+            Total
+        </div>
+        <div class="col">
+            : ₹{{ calcPrice() }}
+            <button (click)="placeOrder(address.value)" class="float-right btn btn-success">
+                Place Order
+            </button>
+        </div>
+    </div>
+    <h4 class="mt-5 text-primary text-center">Thanks you for choosing <span class="text-danger text-weight-bolder">FoodE</span> app</h4>
+    <div class="pb-3">
+    </div>
 </div>
 <ng-template #noCartItems>
-    <h1>
+    <h3>
         No cart items
-        <a routerLink="/user/menu">
+        <a routerLink="/menu">
             Shop Here
             <fa-icon [icon]="fashop"></fa-icon>
         </a>
-    </h1>
+    </h3>
 </ng-template>

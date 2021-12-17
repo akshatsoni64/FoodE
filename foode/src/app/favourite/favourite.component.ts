@@ -26,6 +26,7 @@ export class FavouriteComponent implements OnInit {
     this.service.delFavourite(id).subscribe((data)=>{
       this.favs = this.favs.filter((item)=>item.id!=id)
     })
+    this.favCount -= 1
   }
 
 }

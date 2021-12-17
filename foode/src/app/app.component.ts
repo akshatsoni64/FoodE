@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppService } from './app.service';
+import { User } from './Models/User';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  constructor(){}
+
   ngOnInit(){
-    sessionStorage.setItem('user', '2');
   }
 }

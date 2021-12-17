@@ -14,7 +14,11 @@ import { Food } from '../Models/Food';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private service: AppService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private service: AppService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   food_form: FormGroup = new FormGroup({
     name: new FormControl(null, Validators.required),
@@ -29,6 +33,15 @@ export class AdminComponent implements OnInit {
   updateId!: number;
 
   ngOnInit(): void {
+    if(!("user" in sessionStorage)){
+      this.router.navigate(["login"]);
+    }
+    else{
+      if(this.service.getCurrentUser()['type'] != "admin"){
+        alert("Admin only page")
+        this.router.navigate([''])
+      }
+    }
     this.service.getFood().subscribe(data => {
       this.food = data;
       let foodId = null;

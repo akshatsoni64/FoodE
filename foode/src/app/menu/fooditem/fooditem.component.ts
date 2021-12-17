@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faHeart as borderHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as filledHeart, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as filledHeart, faCartPlus, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { AppService } from 'src/app/app.service';
-import { Favourites } from 'src/app/Models/Favourites';
 import { Food } from 'src/app/Models/Food';
-import { NavigationComponent } from 'src/app/navigation/navigation.component';
 
 @Component({
   selector: 'app-fooditem',
@@ -16,10 +14,19 @@ export class FooditemComponent implements OnInit {
   facart = faCartPlus;
   filledHeart = filledHeart;
   unfilledHeart = borderHeart;
+  falogin = faSignInAlt;
+  authed = false;
   
-  constructor(private service: AppService) {}  
+  constructor(
+    private service: AppService,
+  ) {}  
   
-  ngOnInit(): void {}
+  ngOnInit(): void {    
+    this.authed = "user" in sessionStorage
+    this.service.isAuth.subscribe((data)=>{
+      this.authed=data.auth
+    })
+  }
   
   addToCart(food: Food){
     this.service.add2Cart(food)
@@ -36,10 +43,6 @@ export class FooditemComponent implements OnInit {
         this.iteminfo.favourite = res.id
       })
     }
-  } 
-
-  delFav(id: number){
-    
   }
 
 }

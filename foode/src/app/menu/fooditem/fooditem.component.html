@@ -11,14 +11,19 @@
                 ₹{{ iteminfo.price }}
             </div>
             <div class="col">
-                <div class="float-right">
-                    <button class="btn btn-primary-outline" (click)="addToCart(iteminfo)">
-                        <fa-icon [icon]="facart"></fa-icon>
-                    </button>
-                    <button class="btn btn-primary-outline" (click)="favItem()">
-                        <fa-icon [icon]="iteminfo.favourite != -1 ? filledHeart : unfilledHeart"></fa-icon>
-                    </button>
+                <div class="float-right" *ngIf="!authed; else authContent">
+                    <fa-icon [icon]="falogin" routerLink="/login" title="Login to continue"></fa-icon>
                 </div>
+                <ng-template #authContent>                    
+                    <div class="float-right">
+                        <button class="btn btn-primary-outline" (click)="addToCart(iteminfo)">
+                            <fa-icon [icon]="facart"></fa-icon>
+                        </button>
+                        <button class="btn btn-primary-outline" (click)="favItem()">
+                            <fa-icon [icon]="iteminfo.favourite != -1 ? filledHeart : unfilledHeart"></fa-icon>
+                        </button>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>

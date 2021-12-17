@@ -5,16 +5,38 @@ import { Observable } from 'rxjs';
 import { Cart } from './Models/Cart';
 import { Favourites } from './Models/Favourites';
 import { Food } from './Models/Food';
+import { Order } from './Models/Order';
+import { User } from './Models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
   private apiUrl = "http://localhost:3000/";
-  private user = sessionStorage.getItem('user');
+  isAuth: EventEmitter<{auth: boolean, user: any}> = new EventEmitter();
   $cart: EventEmitter<Cart[]> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
+
+  getCurrentUser(): User{
+    let uname: any = '';
+    if("user" in sessionStorage){
+      uname = sessionStorage.getItem('user')
+      uname = JSON.parse(uname)
+    }
+    return uname
+  }
+
+  getUser(user: string){
+    return this.http.get<User[]>(`${this.apiUrl}users/?username=${user}`)
+  }
+
+  emitAuthMode(val: boolean){
+    this.isAuth.emit({
+      auth: val,
+      user: (val) ? this.getCurrentUser() : undefined
+    })
+  }
 
   // Admin only
   addFood(food: {name: string, description: string, price: number}){
@@ -35,18 +57,52 @@ export class AppService {
   }
 
   // User only
+  getOrders(){
+    return this.http.get<Order[]>(`${this.apiUrl}orders/?user=${this.getCurrentUser()['id']}`)
+  }
+
+  createOrder(cart: Cart[], address: string){
+    let cartTotal = 0;
+    cart.forEach((item)=>{
+      cartTotal += parseInt(item.totalprice.toString())
+    })
+    let order: Order = {
+      user: parseInt(this.getCurrentUser()['id'].toString() || '2'),
+      cart: cart,
+      address: address,
+      totalprice: cartTotal
+    }
+    cart.forEach((item)=>{
+      this.http.patch(`${this.apiUrl}cart/${item.id}`, {
+        active: false
+      }).subscribe()
+    })
+    return this.http.post(`${this.apiUrl}orders/`, order).subscribe((res)=>{
+      this.getCart().subscribe((data)=>{
+        this.$cart.emit(data)
+      })
+    })
+  }
+
   getCart(){
-    return this.http.get<Cart[]>(`${this.apiUrl}cart?user=${this.user}&active=true`);
+    return this.http.get<Cart[]>(`${this.apiUrl}cart?user=${this.getCurrentUser()['id']}&active=true`);
   }
 
   add2Cart(food: Food){
-    this.http.get<Cart[]>(`${this.apiUrl}cart?user=${this.user}&food.id=${food.id}&active=true`).subscribe((data)=>{
+    this.http.get<Cart[]>(`${this.apiUrl}cart?user=${this.getCurrentUser()['id']}&food.id=${food.id}&active=true`).subscribe((data)=>{
       if(data.length > 0){
-        this.http.patch(`${this.apiUrl}cart/${data[0]['id']}/`, {quantity: <number>data[0]['quantity']+1}).subscribe()
+        let q = parseInt((data[0]['quantity'] + 1).toString());
+        this.http.patch(
+          `${this.apiUrl}cart/${data[0]['id']}/`,
+          {
+            totalprice: data[0]['food']['price'] * q,
+            quantity: q
+          }
+        ).subscribe()
       }
       else{
         let item = {
-          "food": food, "user": 2,
+          "food": food, "user": 2, totalprice: food.price,
           "active": true, "quantity": 1
         };
         this.http.post(`${this.apiUrl}cart/`, item).subscribe((res) => {
@@ -70,18 +126,19 @@ export class AppService {
     var q = operation == "add" ? cart.quantity + 1 : cart.quantity - 1;
 
     var data = {
-      'quantity': q
+      'quantity': q,
+      'totalprice': cart.food.price*q
     };
     this.http.patch(`${this.apiUrl}cart/${cart.id}`, data).subscribe();
   }
 
   getFavourite(){
-    return this.http.get<Favourites[]>(`${this.apiUrl}favourites?user=${this.user}`)
+    return this.http.get<Favourites[]>(`${this.apiUrl}favourites?user=${this.getCurrentUser()['id']}`)
   }
 
   add2Favourite(foodItem: Food){
     let data = {
-      user: this.user,
+      user: this.getCurrentUser()['id'],
       food: foodItem
     }
     return this.http.post<Favourites>(`${this.apiUrl}favourites`, data)

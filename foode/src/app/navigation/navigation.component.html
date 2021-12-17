@@ -5,35 +5,45 @@
     </button>
   
     <div class="collapse navbar-collapse" id="navb">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" *ngIf="(authed && !isAdmin) || (!authed); else blankNav">
         <li class="nav-item">
           <a class="nav-link" routerLink="">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/admin/menu">Admin</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/user/menu">Menu</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contact">Contact Us</a>
+          <a class="nav-link" routerLink="/menu">Menu</a>
         </li>
       </ul>
-      <a class="btn btn-outline-info mr-3" routerLink="/user/cart">
-        <fa-icon [icon]="facart"></fa-icon>
-        <span class="ml-2 badge badge-danger">{{ cartCount }}</span>
-      </a>
-      <div class="pt-3 pr-5 dropdown">
-        <p type="button" class="text-white dropdown-toggle" data-toggle="dropdown">
-          Welcome, User
-        </p>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" routerLink="/user/favourite">
-            <fa-icon [icon]="faheart" class="text-danger"></fa-icon>
-            Favourites
-          </a>
-        </div>
+      <ng-template #blankNav>
+        <ul class="navbar-nav mr-auto"></ul>
+      </ng-template>
+      <div class="pr-5 dropdown my-2 my-lg-0" *ngIf="!authed; else authEd">
+        <a class="text-white" routerLink="/login">Login</a>
       </div>
+      <ng-template #authEd>
+        <a class="btn btn-outline-info mr-3" routerLink="/user/cart" *ngIf="!isAdmin">
+          <fa-icon [icon]="facart"></fa-icon>
+          <span class="ml-2 badge badge-danger">{{ cartCount }}</span>
+        </a>
+        <div class="pt-3 pr-5 dropdown">
+          <p class="text-white dropdown-toggle" data-toggle="dropdown">
+            Welcome, <i>{{u.username}}</i>
+          </p>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/user/favourite" *ngIf="!isAdmin">
+              <fa-icon [icon]="faheart" class="text-danger mr-2"></fa-icon>
+              Favourites
+            </a>
+            <a class="dropdown-item" routerLink="/user/order" *ngIf="!isAdmin">
+              <fa-icon [icon]="faorder" class="text-warning mr-2"></fa-icon>
+              My Orders
+            </a>
+            <button class="dropdown-item" (click)="logout()">
+              <fa-icon [icon]="faexit" class="text-info mr-2"></fa-icon>
+              Logout
+            </button>
+          </div>
+        </div>
+      </ng-template>
       <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-success my-2 my-sm-0" type="button">Search</button>

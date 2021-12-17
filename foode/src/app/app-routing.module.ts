@@ -4,15 +4,20 @@ import { AdminComponent } from './admin/admin.component';
 
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
-import { ContactComponent } from './contact/contact.component';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   {
     path: '', 
     component: HomeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'admin/menu', 
@@ -23,13 +28,13 @@ const routes: Routes = [
     component: AdminComponent
   },
   {
+    path: 'menu', 
+    component: MenuComponent
+  },
+  {
     path: "user",
     component: AppComponent,
     children:[
-      {
-        path: 'menu', 
-        component: MenuComponent
-      },
       {
         path: 'cart', 
         component: CartComponent
@@ -38,11 +43,11 @@ const routes: Routes = [
         path: 'favourite',
         component: FavouriteComponent
       },
+      {
+        path: 'order',
+        component: OrderComponent
+      },
     ]
-  },
-  {
-    path: 'contact', 
-    component: ContactComponent
   }
 ];
 

@@ -1,0 +1,50 @@
+<h3 class="mt-5">Your Orders</h3>
+<div class="row" *ngIf="orderCount > 0; else noOrder">
+    <div class="col-5 mx-2" *ngFor="let item of orders; let i = index">
+        <div class="card mt-3">
+            <div class="card-header" 
+                title="Click to view details" 
+                data-toggle="collapse"
+                [attr.data-target]="'#collapse'+i"
+            >
+                <b> Order #{{ i+1 }} </b>
+            </div>
+            <div [id]="'collapse'+i" class="collapse">
+                <div class="card-body">
+                    <ul class="list-group" *ngFor="let food of item.cart">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col">
+                                    {{ food.food.name }}
+                                </div>|
+                                <div class="col text-right">
+                                    ₹{{ food.food.price }} x {{ food.quantity }} = ₹{{ food.totalprice }}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <b>Delievering to:</b> {{item.address}}
+                        </div>
+                        <div class="col text-right">
+                            <b>Total:</b>
+                            ₹{{item.totalprice}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #noOrder>
+    <h3>
+        No Orders Yet!
+        <a routerLink="/menu">
+            Shop Here
+            <fa-icon [icon]="fashop"></fa-icon>
+        </a>
+    </h3>
+</ng-template>
