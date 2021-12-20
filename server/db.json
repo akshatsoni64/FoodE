@@ -88,6 +88,17 @@
         "favourite": -1
       },
       "id": 9
+    },
+    {
+      "user": 2,
+      "food": {
+        "name": "Banana",
+        "description": "Fresh Banana",
+        "price": "120",
+        "id": 4,
+        "favourite": -1
+      },
+      "id": 10
     }
   ],
   "food": [
@@ -218,6 +229,48 @@
       "active": false,
       "quantity": 1,
       "id": 6
+    },
+    {
+      "food": {
+        "name": "Apple",
+        "description": "Fresh Apple",
+        "price": "100",
+        "id": 1,
+        "favourite": 9
+      },
+      "user": 2,
+      "totalprice": 300,
+      "active": false,
+      "quantity": 3,
+      "id": 7
+    },
+    {
+      "food": {
+        "name": "Mango",
+        "description": "Fresh and handpicked delicious Mango fruit, the king of fruit",
+        "price": "150",
+        "id": 2,
+        "favourite": -1
+      },
+      "user": 2,
+      "totalprice": 450,
+      "active": false,
+      "quantity": 3,
+      "id": 8
+    },
+    {
+      "food": {
+        "name": "Mango",
+        "description": "Fresh and handpicked delicious Mango fruit, the king of fruit",
+        "price": "150",
+        "id": 2,
+        "favourite": -1
+      },
+      "user": 2,
+      "totalprice": 300,
+      "active": true,
+      "quantity": 2,
+      "id": 9
     }
   ],
   "orders": [
@@ -314,6 +367,42 @@
       "address": "Some Address, City, State, Country - Pincode",
       "totalprice": 100,
       "id": 3
+    },
+    {
+      "user": 2,
+      "cart": [
+        {
+          "food": {
+            "name": "Apple",
+            "description": "Fresh Apple",
+            "price": "100",
+            "id": 1,
+            "favourite": 9
+          },
+          "user": 2,
+          "totalprice": 300,
+          "active": true,
+          "quantity": 3,
+          "id": 7
+        },
+        {
+          "food": {
+            "name": "Mango",
+            "description": "Fresh and handpicked delicious Mango fruit, the king of fruit",
+            "price": "150",
+            "id": 2,
+            "favourite": -1
+          },
+          "user": 2,
+          "totalprice": 450,
+          "active": true,
+          "quantity": 3,
+          "id": 8
+        }
+      ],
+      "address": "Sample Address",
+      "totalprice": 750,
+      "id": 4
     }
   ]
 }
