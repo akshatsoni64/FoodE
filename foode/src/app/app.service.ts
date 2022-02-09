@@ -12,7 +12,7 @@ import { User } from './Models/User';
   providedIn: 'root'
 })
 export class AppService {
-  private apiUrl = "http://localhost:3000/";
+  apiUrl = "http://localhost:3000/";
   isAuth: EventEmitter<{auth: boolean, user: any}> = new EventEmitter();
   $cart: EventEmitter<Cart[]> = new EventEmitter();
 
